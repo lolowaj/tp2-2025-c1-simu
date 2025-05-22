@@ -21,9 +21,13 @@ app.get("/", (req, res) => {
         message: "API TP2 - Mflix",
         endpoints: [
             { method: "GET", path: "/api/users", description: "Lista todos los usuarios" },
-            { method: "GET", path: "/api/users/:id", description: "Obtiene un usuario por ID" },
+            { method: "GET", path: "/api/users/id/:id", description: "Obtiene un usuario por ID" },
             { method: "GET", path: "/api/movies", description: "Lista todas las películas (soporta paginado)" },
-            { method: "GET", path: "/api/movies/:id", description: "Obtiene una película por ID" }
+            { method: "GET", path: "/api/movies/id/:id", description: "Obtiene una película por ID" },
+            { method: "GET", path: "/api/movies/awarded", description: "Obtiene las películas de más de un premio" },
+            { method: "GET", path: "/api/movies/filtered/:lan", description: "Obtiene las películas filtradas por idioma" },
+            { method: "GET", path: "/api/movies/ordered", description: "Obtiene las películas ordenadas por puntaje" },
+            {method: "GET", path: "/api/users/comments/id/:id", description: "Obtiene un usuario por ID" }
         ],
         pagination: {
             endpoint: "/api/movies",

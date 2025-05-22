@@ -43,3 +43,7 @@ Si ya terminaste o son las 10:00 asegurate de seguir los siguientes pasos para l
 ## Listado de endpoint
 
 -GET /api/movies?pageSize=[pageSize]&page=[page]
+-GET /api/movies/id/:id
+-GET /api/movies/awarded?pageSize=[pageSize]&page=[page]
+-GET /api/movies/filtered/:lan?pageSize=[pageSize]&page=[page]
+-GET /api/movies/ordered?pageSize=[pageSize]&page=[page]

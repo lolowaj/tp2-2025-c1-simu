@@ -1,4 +1,4 @@
-import { findAllUsers, findUserById, registerUser, findByCredentials } from "../data/userData.js";
+import { findAllUsers, findUserById, registerUser, findByCredentials, findUserComments } from "../data/userData.js";
 
 export const getUsers = async () => {
     return await findAllUsers();
@@ -28,4 +28,8 @@ export const loginUserService = async ({ email, password }) => {
     // No devolver password
     const { password: _pw, ...userWithoutPassword } = user;
     return userWithoutPassword;
+}
+
+export const searchUserComments = async (id) => {
+    return await findUserComments(id);
 }

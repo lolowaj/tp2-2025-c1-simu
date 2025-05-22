@@ -1,6 +1,7 @@
 import { getDb } from "./connection.js";
 import { ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
+import { findMovieById } from "./movieData.js";
 
 export async function findAllUsers() {
     const db = getDb();
@@ -48,4 +49,22 @@ export async function registerUser({ username, email, password }) {
     };
     const result = await db.collection("users").insertOne(newUser);
     return result;
+}
+
+export async function findUserComments(id){
+    const db = getDb();
+    const user = await findUserById(id)
+    const userComments = await db.collection("comments").find({email: user.email}).toArray();
+    for (const comment of userComments) {
+        const movieId = comment.movie_id;
+        const movie = await findMovieById(movieId);
+        console.log(movie)
+        if (movie){
+            comment["title"]=movie.title;
+            comment["poster"]=movie.poster;
+        }
+        console.log(comment);
+    }
+    return userComments;
+
 }

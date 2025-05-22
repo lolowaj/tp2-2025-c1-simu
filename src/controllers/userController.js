@@ -1,4 +1,4 @@
-import {getUsers, getUserById, registerUserService, loginUserService} from "../services/userService.js";
+import {getUsers, getUserById, registerUserService, loginUserService, searchUserComments} from "../services/userService.js";
 import jwt from "jsonwebtoken";
 
 export const getAllUsers = async (req, res) => {
@@ -54,6 +54,19 @@ export const registerUserController = async (req, res) => {
 export const getUser = async (req, res) => {
     try {
         const user = await getUserById(req.params.id);
+        if(!user){
+            return res.status(404).json({message: "Usuario no encontrado"});
+        }
+        res.json(user);
+    } catch (error) {
+        console.log("Error fetching users: ", error);
+        res.status(500).json({message: "Internal server error"});
+    }
+};
+
+export const getUserComments = async (req, res) => {
+    try {
+        const user = await searchUserComments(req.params.id);
         if(!user){
             return res.status(404).json({message: "Usuario no encontrado"});
         }
